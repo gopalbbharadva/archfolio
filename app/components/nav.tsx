@@ -7,15 +7,17 @@ import Image from "next/image";
 
 const navItems = {
   "/": { name: "Home" },
+  "/about-us": { name: "About Us" },
   "/services": { name: "Services" },
-  "/photos": { name: "Photos" },
+  "/projects": { name: "Projects" },
+  "/contact-us": { name: "Contact Us" },
 };
 
 export function Navbar() {
   return (
-    <nav className="lg:mb-16 mb-12 py-5">
-      <div className="flex flex-col md:flex-row md:items-center justify-between">
-        <div className="flex items-center">
+    <nav className=" px-12">
+      <div className="flex flex-col md:flex-row md:items-center justify-between bo">
+        <div>
           <Link href="/" className="text-3xl font-semibold tracking-tight">
             <Image
               src={HeroImage}
