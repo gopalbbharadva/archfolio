@@ -108,13 +108,13 @@ html {
   @apply m-0;
 }
 
-.prose h2,
+/* .prose h2,
 h3,
 h4,
 h5,
 h6 {
   @apply font-medium tracking-tight !important;
-}
+} */
 
 .prose strong {
   @apply font-medium;

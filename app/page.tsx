@@ -1,69 +1,129 @@
 'use client'
 
-import Image from "next/image";
+import Image from 'next/image'
 import Hero1 from './photos/Hero1.jpeg'
 import Hero2 from './photos/Hero2.jpeg'
 import Hero3 from './photos/Hero3.webp'
-import { useEffect, useState } from "react";
+import { projects } from './services/project-data'
+import { useEffect, useState } from 'react'
 
 export default function Page() {
   const [currentHeroImage, setCurrentHeroImage] = useState(1)
 
   useEffect(() => {
     const id = setInterval(() => {
-      setCurrentHeroImage(prev => {
+      setCurrentHeroImage((prev) => {
         if (prev === 3) {
-          return 1;
+          return 1
         }
-        return ++prev;
+        return ++prev
       })
-    }, 2000);
+    }, 2000)
     return () => clearInterval(id)
   }, [])
 
-  console.log(currentHeroImage, 'current')
-  const getCurrentHeroImage = () => {
-    switch (currentHeroImage) {
-      case 1: return Hero1
-      case 2: return Hero2
-      case 3: return Hero3
-      default: return Hero1
-    }
-  }
+  /**
+   * First Image: initially/Focus : left-0, Not-Screen: -translate-x-full
+   * Second Image: initiallly: left-full, Focus: left-0 and No-Screen: -translate-x-full
+   * Third Image: initially: left-full, Focus: left-0 and No-Screen: -translate-x-full
+   */
+
 
   return (
-    <section className="flex justify-center items-center border w-full border-red-500">
-      <Image
-        src={getCurrentHeroImage()}
-        alt="Hero"
-        className="h-[50rem] object-cover"
-      // className="rounded-full bg-gray-100 block lg:mt-5 mt-0 
-      //   lg:mb-5 mb-10 mx-auto sm:float-right sm:mb-5 grayscale hover:grayscale-0"
-      // width={150}
-      // height={150}
-      // priority
-      />
-      {/* <div className="w-full max-w-[650px] border border-yellow-500">
-        <h1 className="mb-8 text-2xl font-medium tracking-tight">
-          Vinayak Design Studio
-        </h1>
+    <section className="flex justify-center items-center w-full flex-col">
+      <div className="relative w-full h-[45rem]">
+        <div
+          className={`absolute w-screen transition-all 
+           duration-[2s] ease-out ${
+             currentHeroImage <= 1 ? 'left-0' : '-translate-x-full'
+           }`}
+        >
+          <Image src={Hero1} alt="Hero" className="h-[45rem] object-cover" />
+        </div>
+        <div
+          className={`absolute w-screen transition-all 
+           duration-[2s] ease-out 
+          ${
+            currentHeroImage === 2
+              ? 'left-0'
+              : currentHeroImage >= 2
+              ? '-translate-x-full'
+              : 'left-full'
+          }`}
+        >
+          <Image src={Hero2} alt="Hero" className="h-[45rem] object-cover" />
+        </div>
+        <div
+          className={`absolute
+        transition-all  duration-[2s] ease-out 
+         ${currentHeroImage === 3 ? 'left-0' : 'left-full'}
+          `}
+        >
+          <Image
+            src={Hero3}
+            alt="Hero"
+            className="h-[45rem] object-cover w-screen"
+          />
+        </div>
+      </div>
 
-        <p className="mt-0">
-          Vinayak Design Studio is dedicated to shaping the future of architecture through sustainable and innovative design solutions. We specialize in creating spaces that are not only visually striking but also environmentally responsible and energy-efficient. Our portfolio highlights projects where we’ve integrated cutting-edge
-          technology and sustainable practices to build a better tomorrow.</p>
-      </div> */}
-      {/* <div className="flex flex-col justify-center items-center w-full" >
-        <Image
-          src={HeroImage}
-          alt="Profile photo"
-          className="rounded-full bg-gray-100 block lg:mt-5 mt-0 
-          lg:mb-5 mb-10 mx-auto sm:float-right sm:mb-5 grayscale hover:grayscale-0"
-          unoptimized
-          width={150}
-          height={150}
-          priority
-        />
-      </div> */}
-    </section >
-  );
+      <div className='flex justify-center items-center flex-col gap-4 w-full mt-10'>
+        <div className="px-4 w-full">
+          <h2
+            className="text-white text-3xl 
+          dark:text-white text-center 
+          bg-primaryColor rounded-full"
+          >
+            SERVICES PROVIDED BY VINAYAK STUDIO
+          </h2>
+        </div>
+        <p className="text-center text-gray-400">About Us</p>
+        <div className="space-y-6">
+          <div
+            key={crypto.randomUUID()}
+            className="flex justify-between items-center gap-10 border p-10"
+          >
+            <div className="shadow-lg m-0 rounded-lg p-4">
+              <Image
+                src={projects[0].url}
+                alt="Profile photo"
+                className="block mt-0 rounded-lg max-w-[70rem]"
+                unoptimized
+                width={600}
+                height={100}
+                priority
+              />
+            </div>
+            <div className="flex items-start flex-col self-center gap-4">
+              <p className="text-primaryColor dark:text-white tracking-tight font-medium text-2xl text-center w-full">
+                {projects[0].title}
+              </p>
+              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm text-center">
+                {projects[0].description}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-row-reverse justify-between items-center gap-10 p-10">
+            <Image
+              src={projects[1].url}
+              alt="Profile photo"
+              className="rounded-md shadow-lg p-4 block sm:float-right "
+              unoptimized
+              width={600}
+              height={100}
+              priority
+            />
+            <div className="flex items-start flex-col self-center gap-4">
+              <p className="text-primaryColor dark:text-white tracking-tight font-medium text-2xl text-center w-full">
+                {projects[1].title}
+              </p>
+              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm text-center">
+                {projects[1].description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 }

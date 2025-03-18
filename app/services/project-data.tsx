@@ -1,3 +1,10 @@
+import { StaticImageData } from 'next/image'
+import Photo1 from '../../public/photos/photo1.jpg'
+import Photo2 from '../../public/photos/photo2.jpg'
+import Photo3 from '../../public/photos/photo3.jpg'
+import Photo4 from '../../public/photos/photo4.jpg'
+import Photo5 from '../../public/photos/photo5.jpg'
+import Photo6 from '../../public/photos/photo6.jpg'
 export interface Project {
   title: string;
   description: string;
@@ -39,7 +46,7 @@ export const projects: Project[] = [
     description:
       "Vinayak Design Studio provides tailored commercial interior design solutions that enhance brand identity, optimize functionality, and create memorable user experiences.",
     isLeft: true,
-    url: 'https://5.imimg.com/data5/SELLER/Default/2021/2/XR/GP/MY/24077463/commercial-interior-designer.jpg'
+    url: 'https://www.elegantinterior.info/wp-content/uploads/2023/09/Living10.png'
   },
   {
     title: 'Space planning',

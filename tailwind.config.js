@@ -8,6 +8,9 @@ module.exports = {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
       },
+      colors: {
+        'primaryColor': '#B45309'
+      },
       typography: {
         quoteless: {
           css: {
