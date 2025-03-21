@@ -6,9 +6,12 @@ import Hero2 from './photos/Hero2.jpeg'
 import Hero3 from './photos/Hero3.webp'
 import { projects } from './services/project-data'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const [currentHeroImage, setCurrentHeroImage] = useState(1)
+
+  const router = useRouter()
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -28,17 +31,20 @@ export default function Page() {
    * Third Image: initially: left-full, Focus: left-0 and No-Screen: -translate-x-full
    */
 
-
   return (
     <section className="flex justify-center items-center w-full flex-col">
-      <div className="relative w-full h-[45rem]">
+      {/**
+       * Hero section with slider
+       */}
+
+      <div className="relative w-full h-[40rem]">
         <div
           className={`absolute w-screen transition-all 
            duration-[2s] ease-out ${
              currentHeroImage <= 1 ? 'left-0' : '-translate-x-full'
            }`}
         >
-          <Image src={Hero1} alt="Hero" className="h-[45rem] object-cover" />
+          <Image src={Hero1} alt="Hero" className="h-[40rem] object-cover" />
         </div>
         <div
           className={`absolute w-screen transition-all 
@@ -51,7 +57,7 @@ export default function Page() {
               : 'left-full'
           }`}
         >
-          <Image src={Hero2} alt="Hero" className="h-[45rem] object-cover" />
+          <Image src={Hero2} alt="Hero" className="h-[40rem] object-cover" />
         </div>
         <div
           className={`absolute
@@ -62,12 +68,16 @@ export default function Page() {
           <Image
             src={Hero3}
             alt="Hero"
-            className="h-[45rem] object-cover w-screen"
+            className="h-[40rem] object-cover w-screen"
           />
         </div>
       </div>
 
-      <div className='flex justify-center items-center flex-col gap-4 w-full mt-10'>
+      {/**
+       * SERVICES SECTION
+       */}
+
+      <div className="flex justify-center items-center flex-col gap-4 w-full mt-10">
         <div className="px-4 w-full">
           <h2
             className="text-white text-3xl 
@@ -123,6 +133,13 @@ export default function Page() {
             </div>
           </div>
         </div>
+        <a
+          className="animate-button-link bg-primaryColor 
+          text-white px-4 py-2 rounded-lg hover:cursor-pointer"
+          onClick={() => router.push('/services')}
+        >
+          More Services
+        </a>
       </div>
     </section>
   )

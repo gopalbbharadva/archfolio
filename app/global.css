@@ -164,3 +164,12 @@ table {
 .title {
   text-wrap: balance;
 }
+
+/* !! TODO */
+.animate-button-link {
+  transition: all .2s ease-in-out
+}
+
+.animate-button-link:hover {
+  transform: scale(1.2);
+}
