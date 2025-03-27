@@ -1,13 +1,13 @@
-import "./global.css";
-import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { Navbar } from "./components/nav";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import Footer from "./components/footer";
-import { ThemeProvider } from "./components/theme-switch";
-import { metaData } from "./config";
+import './global.css'
+import type { Metadata } from 'next'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
+import { Navbar } from './components/nav'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import Footer from './components/footer'
+import { ThemeProvider } from './components/theme-switch'
+import { metaData } from './config'
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     description: metaData.description,
     url: metaData.baseUrl,
     siteName: metaData.name,
-    locale: "en_US",
-    type: "website",
+    locale: 'en_US',
+    type: 'website',
   },
   robots: {
     index: true,
@@ -31,26 +31,26 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
   twitter: {
     title: metaData.name,
-    card: "summary_large_image",
+    card: 'summary_large_image',
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: '/favicon.ico',
   },
-};
+}
 
-const cx = (...classes) => classes.filter(Boolean).join(" ");
+const cx = (...classes) => classes.filter(Boolean).join(' ')
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
@@ -74,8 +74,11 @@ export default function RootLayout({
           title="JSON Feed"
         />
       </head>
-      <body className="antialiased flex flex-col items-start justify-center 
-      mx-auto mb-20 lg:mb-40 p-0">
+      <body
+        // !! TODO: needs to change the margin for layouts
+        className="antialiased flex flex-col items-start justify-center 
+              mx-auto mb-20 lg:mb-40 p-0"
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -92,5 +95,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

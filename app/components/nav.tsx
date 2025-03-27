@@ -1,29 +1,29 @@
-import Link from "next/link";
-import { ThemeSwitch } from "./theme-switch";
+import Link from 'next/link'
+import { ThemeSwitch } from './theme-switch'
 import Logo from '../photos/Logo.png'
 import HeroImage from '../photos/HeroImage.png'
-import { metaData } from "../config";
-import Image from "next/image";
+import { metaData } from '../config'
+import Image from 'next/image'
 
 const navItems = {
-  "/": { name: "Home" },
-  "/about-us": { name: "About Us" },
-  "/services": { name: "Services" },
-  "/projects": { name: "Projects" },
-  "/contact-us": { name: "Contact Us" },
-};
+  '/': { name: 'Home' },
+  '/about-us': { name: 'About Us' },
+  '/services': { name: 'Services' },
+  '/projects': { name: 'Projects' },
+  '/contact-us': { name: 'Contact Us' },
+}
 
 export function Navbar() {
   return (
-    <nav className=" px-12">
-      <div className="flex flex-col md:flex-row md:items-center justify-between bo">
+    <nav className="px-12 border-b">
+      <div className="flex flex-col md:flex-row md:items-center justify-between ">
         <div>
           <Link href="/" className="text-3xl font-semibold tracking-tight">
             <Image
               src={HeroImage}
               alt="Profile photo"
-              className="rounded-full bg-gray-100 block lg:mt-5 mt-0 
-          lg:mb-5 mb-10 mx-auto sm:float-right sm:mb-5 grayscale hover:grayscale-0"
+              className="rounded-full bg-gray-100 block
+                sm:float-right m-2 grayscale hover:grayscale-0"
               unoptimized
               width={80}
               height={90}
@@ -47,5 +47,5 @@ export function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }

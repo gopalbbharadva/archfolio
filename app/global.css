@@ -165,11 +165,27 @@ table {
   text-wrap: balance;
 }
 
-/* !! TODO */
+/* !! TODO: do it using the tailwind */
 .animate-button-link {
   transition: all .2s ease-in-out
 }
 
 .animate-button-link:hover {
   transform: scale(1.2);
+}
+
+.animate {
+  opacity: 0;
+  animation: first 1s ease-in-out .5s forwards
+}
+
+@keyframes first {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
