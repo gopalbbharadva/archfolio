@@ -10,7 +10,6 @@ const navItems = {
   '/about-us': { name: 'About Us' },
   '/services': { name: 'Services' },
   '/projects': { name: 'Projects' },
-  '/contact-us': { name: 'Contact Us' },
 }
 
 export function Navbar() {

@@ -134,8 +134,8 @@ export default function Page() {
           </div>
         </div>
         <a
-          className="animate-button-link bg-primaryColor 
-          text-white px-4 py-2 rounded-lg hover:cursor-pointer"
+          className="bg-primaryColor 
+          text-white px-4 py-2 hover:cursor-pointer hover:bg-orange-800"
           onClick={() => router.push('/services')}
         >
           More Services

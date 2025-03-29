@@ -166,14 +166,6 @@ table {
 }
 
 /* !! TODO: do it using the tailwind */
-.animate-button-link {
-  transition: all .2s ease-in-out
-}
-
-.animate-button-link:hover {
-  transform: scale(1.2);
-}
-
 .animate {
   opacity: 0;
   animation: first 1s ease-in-out .5s forwards

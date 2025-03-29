@@ -9,6 +9,10 @@ const nextConfig = {
     },
     {
       protocol: 'https',
+      hostname: 'media.tarkett-image.com'
+    },
+    {
+      protocol: 'https',
       hostname: 'images2.alphacoders.com'
     },
     {

@@ -7,26 +7,37 @@ function AboutUs() {
   return (
     <section className="relative">
       <Image
-        className="w-full h-[38rem] object-cover"
+        className="w-full h-[41rem] object-cover"
         alt="not there"
         width={1000}
         height={1000}
         src="https://images2.alphacoders.com/134/1347182.png"
       />
       <div
-        className="absolute animate top-20 flex justify-center 
+        className="absolute animate top-48 flex justify-center 
       items-center flex-col text-white w-full"
       >
-        <h1 className="text-5xl font-semibold uppercase mb-8">About Us</h1>
-        <p className="text-xl leading-relaxed mb-6 max-w-[50rem]">
-          <span className="font-extrabold text-primary">
-            Vinayak Design Studio
-          </span>
-          , we believe that good design is timeless, thoughtful, and deeply
-          rooted in context. Our practice blends architecture, interior design,
-          and spatial storytelling to create environments that inspire, engage,
-          and endure.
-        </p>
+        <h1 className="text-[4rem] font-semibold uppercase mb-8">About Us</h1>
+      </div>
+
+      <div className='flex justify-evenly items-center py-20'>
+        <div className='flex justify-start items-start flex-col'>
+          <p className="font-extrabold text-primary text-5xl text-primaryColor">
+            Why <br /> Vinayak Design Studio?
+          </p>
+          <p className="text-xl leading-relaxed mb-6 max-w-[40rem]">
+            We believe that good design is timeless, thoughtful, and deeply
+            rooted in context. Our practice blends architecture, interior
+            design, and spatial storytelling to create environments that
+            inspire, engage, and endure.
+          </p>
+        </div>
+        <Image
+          height={400}
+          width={400}
+          src="https://media.tarkett-image.com/large/EMEA_PI_20161128_10_steps_interior_design.jpg"
+          alt="change in the height"
+        />
       </div>
       {/* !! TODO: explore how we can make the div structure same and add hyperlinks */}
       <div className="bg-primaryColor p-16 flex justify-center items-center flex-col gap-20 mt-10">
