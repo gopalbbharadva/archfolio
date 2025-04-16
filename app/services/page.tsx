@@ -2,7 +2,6 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { projects } from './project-data'
 import Image from 'next/image'
-import HeroImage from '../photos/HeroImage.png'
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -15,7 +14,7 @@ export default function Projects() {
       <h1 className="p-0 text-2xl font-medium tracking-tight text-center text-primaryColor underline">
         Services
       </h1>
-      {projects.slice(2,projects.length).map((project, index) => (
+      {projects.slice(2, projects.length).map((project, index) => (
         <div className="space-y-6">
           <div
             key={crypto.randomUUID()}

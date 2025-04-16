@@ -77,7 +77,7 @@ export default function RootLayout({
       <body
         // !! TODO: needs to change the margin for layouts
         className="antialiased flex flex-col items-start justify-center 
-              mx-auto mb-20 lg:mb-40 p-0"
+              mx-auto p-0"
       >
         <ThemeProvider
           attribute="class"
@@ -87,8 +87,8 @@ export default function RootLayout({
         >
           <main className="flex-auto min-w-0 md:mt-2 flex flex-col px-6 sm:px-4 md:px-0 w-full">
             <Navbar />
-            {children}
-            {/* <Footer /> */}
+            <div className="flex-grow">{children}</div>
+            <Footer />
             <Analytics />
             <SpeedInsights />
           </main>

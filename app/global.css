@@ -181,3 +181,54 @@ table {
     opacity: 1;
   }
 }
+
+/* Home page animations */
+
+.fadeIn {
+  opacity: 0;
+  animation: fades-in 1.2s ease-in forwards .5s;
+}
+
+@keyframes fades-in {
+  0% {
+    transform: translateY(5rem);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn2 {
+  opacity: 0;
+  animation: fades-in-2 1.2s ease-in forwards;
+}
+
+@keyframes fades-in-2 {
+  0% {
+    transform: translateY(5rem);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.headTitle {
+  opacity: 0;
+  animation: from-left-in 1.5s ease-out forwards;
+}
+
+@keyframes from-left-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

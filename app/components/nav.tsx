@@ -1,8 +1,6 @@
 import Link from 'next/link'
 import { ThemeSwitch } from './theme-switch'
-import Logo from '../photos/Logo.png'
-import HeroImage from '../photos/HeroImage.png'
-import { metaData } from '../config'
+import HeroImage from '../photos/Logo.png'
 import Image from 'next/image'
 
 const navItems = {

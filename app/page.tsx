@@ -5,11 +5,20 @@ import Hero1 from './photos/Hero1.jpeg'
 import Hero2 from './photos/Hero2.jpeg'
 import Hero3 from './photos/Hero3.webp'
 import { projects } from './services/project-data'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const [currentHeroImage, setCurrentHeroImage] = useState(1)
+  const [visibleFirstServiceSection, setVisibleFirstServiceSection] =
+    useState(false)
+  const [visibleSeconderviceSection, setVisibleSeconderviceSection] =
+    useState(false)
+
+  const [isServicesAvailable, setIsServicesAvailable] = useState(false)
+  const serviceHeaderRef = useRef({} as Element)
+  const firstServiceRef = useRef({} as Element)
+  const secondServiceRef = useRef({} as Element)
 
   const router = useRouter()
 
@@ -31,13 +40,55 @@ export default function Page() {
    * Third Image: initially: left-full, Focus: left-0 and No-Screen: -translate-x-full
    */
 
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.2,
+  }
+
+  const callBack = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && entry.target?.classList.contains('ht')) {
+        setIsServicesAvailable(true)
+      }
+      if (entry.isIntersecting && entry.target?.classList.contains('sv1')) {
+        setVisibleFirstServiceSection(true)
+      }
+      if (entry.isIntersecting && entry.target?.classList.contains('sv2')) {
+        setVisibleSeconderviceSection(true)
+      }
+    })
+  }
+
+  const registerIntersectionObserver = () => {
+    const observerInstance = new IntersectionObserver(callBack, options)
+    // observerInstance.observe(serviceHeaderRef.current)
+    // const targetElement = serviceHeaderRef.current[
+    const refs = [serviceHeaderRef, firstServiceRef, secondServiceRef]
+    refs.forEach((element: any) => {
+      observerInstance.observe(element.current)
+    })
+    // return { observerInstance, targetElement }
+  }
+
+  useEffect(() => {
+    registerIntersectionObserver()
+    // const { observerInstance, targetElement } = registerIntersectionObserver()
+    // const { observerInstance, targetElement } = registerIntersectionObserver()
+    // return () => {
+    //   observerInstance.unobserve(targetElement)
+    //   setVisibleFirstServiceSection(false)
+    // }
+  }, [])
+  // console.log(visibleFirstServiceSection, 'iservices')
+
   return (
     <section className="flex justify-center items-center w-full flex-col">
       {/**
        * Hero section with slider
        */}
 
-      <div className="relative w-full h-[40rem]">
+      <div className="animate relative w-full h-[40rem]">
         <div
           className={`absolute w-screen transition-all 
            duration-[2s] ease-out ${
@@ -77,8 +128,19 @@ export default function Page() {
        * SERVICES SECTION
        */}
 
-      <div className="flex justify-center items-center flex-col gap-4 w-full mt-10">
-        <div className="px-4 w-full">
+      {/* <div ref={serviceHeaderRef} className="w-10 mt-10 h-10 bg-red-500">
+        this is target element
+      </div> */}
+
+      <div
+        className={`flex justify-center items-center flex-col gap-4 w-full mt-10`}
+      >
+        <div
+          ref={serviceHeaderRef}
+          className={`px-4 w-full ht ${
+            isServicesAvailable ? 'headTitle' : 'opacity-0'
+          }`}
+        >
           <h2
             className="text-white text-3xl 
           dark:text-white text-center 
@@ -87,11 +149,12 @@ export default function Page() {
             SERVICES PROVIDED BY VINAYAK STUDIO
           </h2>
         </div>
-        <p className="text-center text-gray-400">About Us</p>
-        <div className="space-y-6">
+        <div className="space-y-6 mt-4">
           <div
-            key={crypto.randomUUID()}
-            className="flex justify-between items-center gap-10 border p-10"
+            ref={firstServiceRef}
+            className={`flex justify-between items-center gap-10 border p-10 sv1 ${
+              visibleFirstServiceSection ? 'fadeIn' : 'opacity-0'
+            }`}
           >
             <div className="shadow-lg m-0 rounded-lg p-4">
               <Image
@@ -113,7 +176,12 @@ export default function Page() {
               </p>
             </div>
           </div>
-          <div className="flex flex-row-reverse justify-between items-center gap-10 p-10">
+          <div
+            ref={secondServiceRef}
+            className={`flex flex-row-reverse sv-2 justify-between items-center gap-10 p-10 sv2 ${
+              visibleSeconderviceSection ? 'fadeIn2' : 'opacity-0'
+            }`}
+          >
             <Image
               src={projects[1].url}
               alt="Profile photo"
