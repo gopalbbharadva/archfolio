@@ -5,7 +5,7 @@ import Hero1 from './photos/Hero1.jpeg'
 import Hero2 from './photos/Hero2.jpeg'
 import Hero3 from './photos/Hero3.webp'
 import { projects } from './services/project-data'
-import { useEffect, useRef, useState } from 'react'
+import { LegacyRef, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Page() {
@@ -16,9 +16,9 @@ export default function Page() {
     useState(false)
 
   const [isServicesAvailable, setIsServicesAvailable] = useState(false)
-  const serviceHeaderRef = useRef({} as Element)
-  const firstServiceRef = useRef({} as Element)
-  const secondServiceRef = useRef({} as Element)
+  const serviceHeaderRef = useRef<HTMLDivElement>(null)
+  const firstServiceRef = useRef<HTMLDivElement>(null)
+  const secondServiceRef = useRef<HTMLDivElement>(null)
 
   const router = useRouter()
 
@@ -62,13 +62,10 @@ export default function Page() {
 
   const registerIntersectionObserver = () => {
     const observerInstance = new IntersectionObserver(callBack, options)
-    // observerInstance.observe(serviceHeaderRef.current)
-    // const targetElement = serviceHeaderRef.current[
     const refs = [serviceHeaderRef, firstServiceRef, secondServiceRef]
-    refs.forEach((element: any) => {
-      observerInstance.observe(element.current)
+    refs.forEach((element) => {
+      element.current && observerInstance.observe(element.current)
     })
-    // return { observerInstance, targetElement }
   }
 
   useEffect(() => {
