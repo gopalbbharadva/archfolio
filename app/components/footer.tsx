@@ -30,7 +30,7 @@ function SocialLink({ href, icon: Icon }) {
 
 export default function Footer() {
   return (
-    <div className="border flex justify-between items-center gap-10 p-10 mt-4">
+    <div className="flex justify-between items-center gap-10 p-10 mt-4 border-t border-primaryColor">
       {/* Logo part  */}
       <div className="flex flex-col justify-start items-center gap-5 w-full">
         <Link href="/" className="text-3xl font-semibold tracking-tight">

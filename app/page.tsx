@@ -43,7 +43,7 @@ export default function Page() {
   const options = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.2,
+    threshold: 0.5,
   }
 
   const callBack = (entries) => {
@@ -129,9 +129,7 @@ export default function Page() {
         this is target element
       </div> */}
 
-      <div
-        className={`flex justify-center items-center flex-col gap-4 w-full mt-10`}
-      >
+      <div className="flex justify-center items-center flex-col w-full mt-10">
         <div
           ref={serviceHeaderRef}
           className={`px-4 w-full ht ${
@@ -146,12 +144,12 @@ export default function Page() {
             SERVICES PROVIDED BY VINAYAK STUDIO
           </h2>
         </div>
-        <div className="space-y-6 mt-4">
+        <div className="mt-10 px-14">
           <div
             ref={firstServiceRef}
-            className={`flex justify-between items-center gap-10 border p-10 sv1 ${
-              visibleFirstServiceSection ? 'fadeIn' : 'opacity-0'
-            }`}
+            className={`flex justify-between items-center gap-10 border p-10 sv1
+              ${visibleFirstServiceSection ? 'fadeIn' : 'opacity-0'}
+            `}
           >
             <div className="shadow-lg m-0 rounded-lg p-4">
               <Image
@@ -159,16 +157,19 @@ export default function Page() {
                 alt="Profile photo"
                 className="block mt-0 rounded-lg max-w-[70rem]"
                 unoptimized
-                width={600}
+                width={500}
                 height={100}
                 priority
               />
             </div>
             <div className="flex items-start flex-col self-center gap-4">
-              <p className="text-primaryColor dark:text-white tracking-tight font-medium text-2xl text-center w-full">
+              <p
+                className="text-primaryColor dark:text-white tracking-tight font-medium 
+              text-2xl text-center w-full"
+              >
                 {projects[0].title}
               </p>
-              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm text-center">
+              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-lg text-center font-light">
                 {projects[0].description}
               </p>
             </div>
@@ -184,15 +185,18 @@ export default function Page() {
               alt="Profile photo"
               className="rounded-md shadow-lg p-4 block sm:float-right "
               unoptimized
-              width={600}
+              width={500}
               height={100}
               priority
             />
-            <div className="flex items-start flex-col self-center gap-4">
-              <p className="text-primaryColor dark:text-white tracking-tight font-medium text-2xl text-center w-full">
+            <div className="flex items-center flex-col self-center gap-4">
+              <p
+                className="text-primaryColor dark:text-white tracking-tight 
+                    font-2xl text-2xl text-center w-full font-medium"
+              >
                 {projects[1].title}
               </p>
-              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm text-center">
+              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-lg font-light w-[70%]">
                 {projects[1].description}
               </p>
             </div>
@@ -200,7 +204,7 @@ export default function Page() {
         </div>
         <a
           className="bg-primaryColor 
-          text-white px-4 py-2 hover:cursor-pointer hover:bg-orange-800"
+          text-white px-4 py-2 hover:cursor-pointer hover:bg-orange-800 rounded-full"
           onClick={() => router.push('/services')}
         >
           More Services
