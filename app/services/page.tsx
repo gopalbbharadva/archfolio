@@ -1,120 +1,152 @@
-import React from 'react'
-import type { Metadata } from 'next'
-import { projects } from './project-data'
-import Image from 'next/image'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Projects',
-  description: 'My Projects',
-}
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Project, projects } from './project-data'
+import { ServiceCard } from 'app/components/ServiceCard'
 
 export default function Projects() {
+  const titleRef = useRef<HTMLDivElement>(null)
+  const firstRef = useRef<HTMLDivElement>(null)
+  const secondRef = useRef<HTMLDivElement>(null)
+  const thirdRef = useRef<HTMLDivElement>(null)
+  const fourthRef = useRef<HTMLDivElement>(null)
+
+  const [firstTitle, setFirstTitle] = useState(false)
+  const [firstService, setFirstService] = useState(false)
+  const [secondService, setSecondService] = useState(false)
+  const [thirdService, setThirdService] = useState(false)
+  const [fourthService, setFourthService] = useState(false)
+
+  const arr = [firstRef, secondRef, thirdRef, fourthRef, titleRef]
+  const stateArr = [firstService, secondService, thirdService, fourthService]
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.7,
+  }
+
+  // console.log(firstService, 'first Service')
+
+  const callback = (entries: IntersectionObserverEntry[]) => {
+    // console.log(entries, 'entries')
+    for (let entry of entries) {
+      // console.log(entry, 'ent')
+      if (entry.isIntersecting && entry.target.classList.contains('title')) {
+        // console.log('titleRef')
+        setFirstTitle(true)
+      }
+      if (entry.isIntersecting && entry.target.classList.contains('f1')) {
+        console.log('entry&&&&&')
+        setFirstService(true)
+        // element.classList.add('.headTitle')
+      }
+      if (entry.isIntersecting && entry.target.classList.contains('s2')) {
+        // console.log('entry 2(((((')
+        setSecondService(true)
+        // element.classList.add('.headTitle')
+      }
+      if (entry.isIntersecting && entry.target.classList.contains('t3')) {
+        // console.log('entry 3(((((')
+        setThirdService(true)
+        // element.classList.add('.headTitle')
+      }
+      if (entry.isIntersecting && entry.target.classList.contains('f4')) {
+        // console.log('entry 4(((((')
+        setFourthService(true)
+        // element.classList.add('.headTitle')
+      }
+    }
+  }
+
+  console.log(firstTitle, 'firstTitle')
+
+  const getAnimation = () => {
+    const observerInstance = new IntersectionObserver(callback, options)
+    // console.log(arr, 'arr')
+    arr.forEach((element) => {
+      if (element.current) {
+        // console.log('count')
+        observerInstance.observe(element.current)
+      } else {
+        // console.log('else')
+        // observerInstance.observe(element.current)
+      }
+    })
+  }
+
+  useEffect(() => {
+    getAnimation()
+  }, [])
+
+  type pType = Project & {
+    refElement: React.RefObject<HTMLDivElement>
+  }
+
+  const addRefs = () => {
+    let updatedProjectsArr: pType[] = []
+    const tempArr = projects.slice(2, projects.length)
+    for (let i = 0; i < tempArr.length; i++) {
+      updatedProjectsArr = [
+        ...updatedProjectsArr,
+        { ...projects[i], refElement: arr[i], stateVar: stateArr[i] },
+      ]
+    }
+    return updatedProjectsArr
+  }
+  const memoizedCallBack = useCallback(addRefs, [projects, stateArr])
+
   return (
     <section>
-      <h1 className="p-0 text-2xl font-medium tracking-tight text-center text-primaryColor underline">
-        Services
-      </h1>
-      {/* <div className="shadow-lg m-0 rounded-lg p-4 block border max-w-9 h-auto">
-        <Image
-          src={
-            'https://www.nppartners.net/wp-content/uploads/2021/10/interior-plan-sketch3.jpg'
-          }
-          alt="Profile photo"
-          className="block mt-0 rounded-lg"
-          unoptimized
-          fill
-          // width={300}
-          // height={100}
-          priority
-        />
-      </div> */}
-
-      {/* <div
-        style={{
-          position: 'relative',
-          width: '400px',
-          maxWidth: '100%',
-          aspectRatio: 1.5,
-        }}
-      >
-        <Image
-          src={
-            'https://www.elegantinterior.info/wp-content/uploads/2023/09/Living10.png'
-          }
-          unoptimized
-          alt="Picture of the author"
-          fill
-          style={{
-            objectFit: 'cover',
-          }}
-        />
-      </div>
       <div
-        style={{
-          position: 'relative',
-          width: '400px',
-          maxWidth: '100%',
-          aspectRatio: 1.5,
-        }}
+        ref={titleRef}
+        // className="servicesTitle"
+        // className={`title ${firstTitle ? 'servicesTitle' : 'opacity-0'}`}
       >
-        <Image
-          src={
-            'https://5.imimg.com/data5/SELLER/Default/2023/8/337646107/YR/RI/WC/123361265/arch2o-architectural-sketching-10-architecture-sketching-tips-1.jpg'
-          }
-          alt="Profile photo"
-          unoptimized
-          fill
-          style={{ objectFit: 'cover' }}
-          priority
-        />
-      </div> */}
+        <h1
+          // className="servicesTitle"
+          className={`p-0 text-2xl mt-5 font-medium tracking-tight 
+            text-center text-primaryColor underline servicesTitle`}
+        >
+          Services
+        </h1>
+      </div>
 
-      {projects.slice(2, projects.length).map((project) => (
-        <div className="space-y-6">
-          <div
-            key={crypto.randomUUID()}
-            className="flex justify-between items-center gap-10 p-10"
-          >
-            {project.isLeft && (
-              <div
-                className="shadow-lg m-0 rounded-lg w-[400px] max-w-full 
-              aspect-[1.5] relative border border-red-500 flex-shrink-0"
-              >
-                <Image
-                  src={project.url}
-                  alt="Profile photo"
-                  className="block mt-0 rounded-lg object-cover"
-                  unoptimized
-                  fill
-                  priority
-                />
+      {/* {projects.slice(2, projects.length).map((project) => ( */}
+      {memoizedCallBack().map((project) => {
+        console.log(project, 'project')
+        return (
+          <div className="space-y-6">
+            <div
+              key={project.url}
+              ref={project.refElement}
+              className={`flex justify-between items-center gap-10 opacity-0 p-10 px-20 ${
+                project.idClass
+              } ${!project.isLeft ? 'flex-row-reverse' : ''} ${
+                project.stateVar ? project.animationClass : ''
+              }`}
+            >
+              <ServiceCard
+                imageClassStyle="block mt-0 shadow-lg p-4 rounded-lg object-fit"
+                imageUrl={project.url}
+                containerClassStyle="shadow-lg m-0 rounded-lg p-4 w-[450px] max-w-full 
+                  aspect-[1.5] relative flex-shrink-0"
+              />
+              <div className="flex items-end flex-col self-center gap-4">
+                <p
+                  className="text-primaryColor dark:text-white tracking-tight font-medium 
+                  text-2xl text-center w-full"
+                >
+                  {project.title}
+                </p>
+                <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-lg text-center font-light">
+                  {project.description}
+                </p>
               </div>
-            )}
-            <div className="flex items-start flex-col self-center gap-4">
-              <p className="text-primaryColor dark:text-white tracking-tight font-medium text-2xl text-center w-full">
-                {project.title}
-              </p>
-              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-sm text-center">
-                {project.description}
-              </p>
-            </div>
-            <div className="flex flex-row-reverse justify-between items-center gap-10 p-10">
-              {!project.isLeft && (
-                <div className="shadow-lg m-0 rounded-lg p-4 w-[400px] aspect-[1.5] max-w-full relative border border-red-500">
-                  <Image
-                    src={project.url}
-                    alt="Profile photo"
-                    className="block mt-0 rounded-lg object-cover"
-                    unoptimized
-                    fill
-                    priority
-                  />
-                </div>
-              )}
             </div>
           </div>
-        </div>
-      ))}
+        )
+      })}
     </section>
   )
 }

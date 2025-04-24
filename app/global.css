@@ -236,7 +236,6 @@ table {
   }
 }
 
-
 .headTitle {
   opacity: 0;
   animation: from-left-in 1.5s ease-out forwards;
@@ -246,6 +245,68 @@ table {
   0% {
     opacity: 0;
     transform: translateX(-100%);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* SERVICES SECTION */
+
+.servicesTitle {
+  animation: from-below 1s ease-out forwards;
+  opacity: 0;
+}
+
+
+@keyframes from-below {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  20% {
+    opacity: .2;
+  }
+
+  50% {
+    opacity: .5;
+  }
+
+  80% {
+    opacity: .8;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.slideFromLeft {
+  animation: from-left 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes from-left {
+  0% {
+    transform: translateX(-100%)
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.slideFromRight {
+  animation: from-right 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes from-right {
+  0% {
+    transform: translateX(100%)
   }
 
   100% {

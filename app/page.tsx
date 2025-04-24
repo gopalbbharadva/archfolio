@@ -7,6 +7,7 @@ import Hero3 from './photos/Hero3.webp'
 import { projects } from './services/project-data'
 import { LegacyRef, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { ServiceCard } from './components/ServiceCard'
 
 export default function Page() {
   const [currentHeroImage, setCurrentHeroImage] = useState(1)
@@ -147,21 +148,16 @@ export default function Page() {
         <div className="mt-10 px-14">
           <div
             ref={firstServiceRef}
-            className={`flex justify-between items-center gap-10 border p-10 sv1
+            className={`flex justify-between items-center gap-10 p-10 sv1
               ${visibleFirstServiceSection ? 'fadeIn' : 'opacity-0'}
             `}
           >
-            <div className="shadow-lg m-0 rounded-lg p-4">
-              <Image
-                src={projects[0].url}
-                alt="Profile photo"
-                className="block mt-0 rounded-lg max-w-[70rem]"
-                unoptimized
-                width={500}
-                height={100}
-                priority
-              />
-            </div>
+            <ServiceCard
+              imageClassStyle="block mt-0 shadow-lg p-4 rounded-lg object-fit"
+              imageUrl={projects[0].url}
+              containerClassStyle="shadow-lg m-0 rounded-lg p-4 w-[450px] max-w-full 
+              aspect-[1.5] relative flex-shrink-0"
+            />
             <div className="flex items-start flex-col self-center gap-4">
               <p
                 className="text-primaryColor dark:text-white tracking-tight font-medium 
@@ -169,7 +165,7 @@ export default function Page() {
               >
                 {projects[0].title}
               </p>
-              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-lg text-center font-light">
+              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-lg text-start font-light">
                 {projects[0].description}
               </p>
             </div>
@@ -180,14 +176,11 @@ export default function Page() {
               visibleSeconderviceSection ? 'fadeIn2' : 'opacity-0'
             }`}
           >
-            <Image
-              src={projects[1].url}
-              alt="Profile photo"
-              className="rounded-md shadow-lg p-4 block sm:float-right "
-              unoptimized
-              width={500}
-              height={100}
-              priority
+            <ServiceCard
+              imageUrl={projects[1].url}
+              containerClassStyle="shadow-lg m-0 rounded-lg p-4 w-[450px] max-w-full 
+               aspect-[1.5] relative flex-shrink-0"
+              imageClassStyle="rounded-md shadow-lg p-4 block sm:float-right object-cover"
             />
             <div className="flex items-center flex-col self-center gap-4">
               <p
@@ -196,7 +189,7 @@ export default function Page() {
               >
                 {projects[1].title}
               </p>
-              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-lg font-light w-[70%]">
+              <p className="text-neutral-600 dark:text-neutral-400 tabular-nums text-lg font-light text-start">
                 {projects[1].description}
               </p>
             </div>

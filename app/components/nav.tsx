@@ -12,7 +12,7 @@ const navItems = {
 
 export function Navbar() {
   return (
-    <nav className="px-12 border-b">
+    <nav className="px-12 border-b border-primaryColor">
       <div className="flex flex-col md:flex-row md:items-center justify-between ">
         <div className="relative">
           <Link href="/" className="text-3xl font-semibold tracking-tight">
