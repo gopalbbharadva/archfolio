@@ -2,6 +2,29 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    remotePatterns: [{
+      protocol: 'https',
+      hostname: 's3.amazonaws.com'
+    },
+    {
+      protocol: 'https',
+      hostname: 'media.tarkett-image.com'
+    },
+    {
+      protocol: 'https',
+      hostname: 'images2.alphacoders.com'
+    },
+    {
+      protocol: 'https',
+      hostname: 'encrypted-tbn0.gstatic.com'
+    },
+    {
+      protocol: 'https',
+      hostname: 'media.designcafe.com'
+    }
+    ]
+  },
   async rewrites() {
     return [
       {
