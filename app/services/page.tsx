@@ -37,7 +37,6 @@ export default function Projects() {
         setFirstTitle(true)
       }
       if (entry.isIntersecting && entry.target.classList.contains('f1')) {
-        console.log('entry&&&&&')
         setFirstService(true)
         // element.classList.add('.headTitle')
       }
@@ -100,11 +99,8 @@ export default function Projects() {
     <section>
       <div
         ref={titleRef}
-        // className="servicesTitle"
-        // className={`title ${firstTitle ? 'servicesTitle' : 'opacity-0'}`}
       >
         <h1
-          // className="servicesTitle"
           className={`p-0 text-2xl mt-5 font-medium tracking-tight 
             text-center text-primaryColor underline servicesTitle`}
         >
@@ -120,11 +116,9 @@ export default function Projects() {
             <div
               key={project.url}
               ref={project.refElement}
-              className={`flex justify-between items-center gap-10 opacity-0 p-10 px-20 ${
-                project.idClass
-              } ${!project.isLeft ? 'flex-row-reverse' : ''} ${
-                project.stateVar ? project.animationClass : ''
-              }`}
+              className={`flex justify-between items-center gap-10 opacity-0 p-10 px-20 ${project.idClass
+                } ${!project.isLeft ? 'flex-row-reverse' : ''} ${project.stateVar ? project.animationClass : ''
+                }`}
             >
               <ServiceCard
                 imageClassStyle="block mt-0 shadow-lg p-4 rounded-lg object-fit"
