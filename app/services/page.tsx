@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Project, projects } from './project-data'
+import { Project, projects } from './services-data'
 import { ServiceCard } from 'app/components/ServiceCard'
 
 export default function Projects() {
