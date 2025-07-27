@@ -51,7 +51,7 @@ export default function Footer() {
         </p>
       </div>
       {/* Quick links part  */}
-      <div className="flex flex-col justify-start items-center self-start w-full">
+      <div className="flex justify-start items-start self-start w-full gap-20">
         <div className="flex flex-col justify-start items-start gap-6">
           <a href="/">Home</a>
           <a href="/services">Services</a>
@@ -60,34 +60,37 @@ export default function Footer() {
           </a>
           <a href="/projects">Projects</a>
         </div>
+        <div className="flex flex-col justify-start items-start gap-4 w-full">
+          <a
+            href="https://g.co/kgs/cJUSPUU"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-start gap-2 text-sm text-gray-800 hover:underline"
+          >
+            <MdOutlineLocationOn size={20} className="text-primaryColor mt-1" />
+            <p className="text-base underline text-primaryColor hover:underline hover:text-primaryColor transition">
+              131, J9 High Street, Opp. Celestial Dream
+            </p>
+          </a>
+
+          <div className="flex justify-start items-start gap-2">
+            <MdOutlinePhone size={20} className="text-primaryColor" />
+            <a
+              href="tel:+919106337193"
+              className="text-base text-gray-800 hover:underline hover:text-primaryColor transition"
+            >
+              +91 9106337193
+            </a>
+          </div>
+          <a href="mailto:gopalbbharadva@gmail.com">
+            <div className="flex justify-start items-center gap-2  text-base text-gray-800 hover:underline hover:text-primaryColor transition">
+              <MdOutlineEmail size={20} className="text-primaryColor" />
+              vinayak.studio.int@gmail.com
+            </div>
+          </a>
+        </div>
       </div>
       {/* Contact us part */}
-      <div className="flex flex-col justify-between self-start gap-4">
-        <div className="flex justify-start items-start gap-2">
-          <MdOutlineLocationOn
-            size={20}
-            className="text-primaryColor w-24 mt-1"
-          />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi labore
-            recusandae minus cum optio esse vel blanditiis architecto alias iure
-            enim quidem dolorum aut repellat voluptatum, voluptatem at ullam
-            voluptas obcaecati eveniet aliquam explicabo perferendis. Sunt,
-            quibusdam magni. Quis eos, eius ipsum corrupti omnis ratione
-            deleniti nobis facilis doloremque possimus!
-          </p>
-        </div>
-        <div className="flex justify-start items-start gap-2">
-          <MdOutlinePhone size={20} className="text-primaryColor" />
-          <p>+91 9328174399</p>
-        </div>
-        <a href="mailto:gopalbbharadva@gmail.com">
-          <div className="flex justify-start items-center gap-2">
-            <MdOutlineEmail size={20} className="text-primaryColor" />
-            gopalbbharadva@gmail.com
-          </div>
-        </a>
-      </div>
     </div>
     // <small className="block lg:mt-24 mt-16 text-[#1C1C1C] dark:text-[#D4D4D4] border border-red-500">
     //   {metaData.title}

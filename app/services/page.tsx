@@ -129,7 +129,7 @@ export default function Projects() {
               <ServiceCard
                 imageClassStyle="block mt-0 shadow-lg p-4 rounded-lg object-fit"
                 imageUrl={project.url}
-                containerClassStyle="shadow-lg m-0 rounded-lg p-4 w-[450px] max-w-full 
+                containerClassStyle="shadow-lg m-0 rounded-lg p-4 w-[40rem] max-w-full 
                   aspect-[1.5] relative flex-shrink-0"
               />
               <div className="flex items-end flex-col self-center gap-4">
