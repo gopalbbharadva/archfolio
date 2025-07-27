@@ -20,8 +20,8 @@ function AboutUs() {
         <h1 className="text-[4rem] font-semibold uppercase mb-8">About Us</h1>
       </div>
 
-      <div className='flex justify-evenly items-center py-20'>
-        <div className='flex justify-start items-start flex-col'>
+      <div className="flex justify-evenly items-center py-20">
+        <div className="flex justify-start items-start flex-col">
           <p className="font-extrabold text-primary text-5xl text-primaryColor">
             Why <br /> Vinayak Design Studio?
           </p>
@@ -53,18 +53,18 @@ function AboutUs() {
         <div className="flex justify-evenly items-center gap-40">
           <div>
             <HiOutlineBuildingOffice size={80} color="white" />
-            <p className="text-white">Adajan, Surat</p>
+            <p className="text-white">Surat</p>
           </div>
           <a className="text-white" href="mailto:gopalbbharadva@gmail.com">
             <div className="flex justify-center items-center flex-col">
               <MdOutlineEmail size={80} color="white" />
-              vinayakstudio@gmail.com
+              vinayak.studio.int@gmail.com
             </div>
           </a>
           <a href="tel: 9328174399">
             <div>
               <MdOutlinePhone size={80} color="white" />
-              <p className="text-white">+91 9328174399</p>
+              <p className="text-white">+91 9106337193</p>
             </div>
           </a>
         </div>

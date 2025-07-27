@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Hero1 from './photos/Hero1.jpeg'
 import Hero2 from './photos/Hero2.jpeg'
 import Hero3 from './photos/Hero3.webp'
-import { projects } from './services/project-data'
+import { projects } from './services/services-data'
 import { LegacyRef, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ServiceCard } from './components/ServiceCard'
@@ -155,7 +155,7 @@ export default function Page() {
             <ServiceCard
               imageClassStyle="block mt-0 shadow-lg p-4 rounded-lg object-fit"
               imageUrl={projects[0].url}
-              containerClassStyle="shadow-lg m-0 rounded-lg p-4 w-[450px] max-w-full 
+              containerClassStyle="shadow-lg m-0 rounded-lg p-4 w-[40rem] max-w-full 
               aspect-[1.5] relative flex-shrink-0"
             />
             <div className="flex items-start flex-col self-center gap-4">
@@ -178,7 +178,7 @@ export default function Page() {
           >
             <ServiceCard
               imageUrl={projects[1].url}
-              containerClassStyle="shadow-lg m-0 rounded-lg p-4 w-[450px] max-w-full 
+              containerClassStyle="shadow-lg m-0 rounded-lg p-4 w-[40rem] max-w-full 
                aspect-[1.5] relative flex-shrink-0"
               imageClassStyle="rounded-md shadow-lg p-4 block sm:float-right object-cover"
             />
@@ -197,7 +197,7 @@ export default function Page() {
         </div>
         <a
           className="bg-primaryColor 
-          text-white px-4 py-2 hover:cursor-pointer hover:bg-orange-800 rounded-full"
+          text-white px-6 py-4 hover:cursor-pointer hover:bg-orange-800 rounded-full text-lg"
           onClick={() => router.push('/services')}
         >
           More Services
