@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react'
 import { images } from 'public/projects/projects-data'
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
+import { redirect, useSearchParams } from 'next/navigation'
 
 const Projects = () => {
   const searchParams = useSearchParams()
@@ -13,6 +13,9 @@ const Projects = () => {
     if (!filter) return images
     return images.filter((img) => img.category === filter)
   }, [filter])
+  if (!searchParams.get('filter')) {
+    redirect('/projects?filter=commercial')
+  }
 
   return (
     <div className="grid grid-cols-3 gap-6 p-4">
