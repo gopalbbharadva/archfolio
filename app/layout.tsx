@@ -8,6 +8,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import Footer from './components/footer'
 import { ThemeProvider } from './components/theme-switch'
 import { metaData } from './config'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
@@ -53,47 +54,49 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
-      <head>
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          href="/rss.xml"
-          title="RSS Feed"
-        />
-        <link
-          rel="alternate"
-          type="application/atom+xml"
-          href="/atom.xml"
-          title="Atom Feed"
-        />
-        <link
-          rel="alternate"
-          type="application/feed+json"
-          href="/feed.json"
-          title="JSON Feed"
-        />
-      </head>
-      <body
-        // !! TODO: needs to change the margin for layouts
-        className="antialiased flex flex-col items-start justify-center 
+    <Suspense>
+      <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
+        <head>
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            href="/rss.xml"
+            title="RSS Feed"
+          />
+          <link
+            rel="alternate"
+            type="application/atom+xml"
+            href="/atom.xml"
+            title="Atom Feed"
+          />
+          <link
+            rel="alternate"
+            type="application/feed+json"
+            href="/feed.json"
+            title="JSON Feed"
+          />
+        </head>
+        <body
+          // !! TODO: needs to change the margin for layouts
+          className="antialiased flex flex-col items-start justify-center 
               mx-auto p-0"
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
         >
-          <main className="flex-auto min-w-0 md:mt-2 flex flex-col px-6 sm:px-4 md:px-0 w-full">
-            <Navbar />
-            <div className="flex-grow">{children}</div>
-            <Footer />
-            <Analytics />
-            <SpeedInsights />
-          </main>
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="flex-auto min-w-0 md:mt-2 flex flex-col px-6 sm:px-4 md:px-0 w-full">
+              <Navbar />
+              <div className="flex-grow">{children}</div>
+              <Footer />
+              <Analytics />
+              <SpeedInsights />
+            </main>
+          </ThemeProvider>
+        </body>
+      </html>
+    </Suspense>
   )
 }
