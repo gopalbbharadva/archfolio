@@ -16,21 +16,25 @@ const Projects = () => {
   if (!searchParams.get('filter')) {
     redirect('/projects?filter=commercial')
   }
+  console.log(filter, 'fitler')
 
   return (
-    <div className="grid grid-cols-3 gap-6 p-4">
-      {filteredImagesBasedOnCategory?.map(({ url }) => (
-        <div
-          key={`${url}`}
-          className="rounded-xl overflow-hidden border border-gray-300 shadow-md"
-        >
-          <Image
-            src={url}
-            alt={`Image ${url}`}
-            className="w-full h-96 object-fill"
-          />
-        </div>
-      ))}
+    <div>
+      <p className="text-3xl uppercase text-primaryColor font-normal text-center p-4">{filter}</p>
+      <div className="grid grid-cols-3 gap-6 p-4">
+        {filteredImagesBasedOnCategory?.map(({ url }) => (
+          <div
+            key={`${url}`}
+            className="rounded-xl overflow-hidden border border-gray-300 shadow-md"
+          >
+            <Image
+              src={url}
+              alt={`Image ${url}`}
+              className="w-full h-96 object-fill"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

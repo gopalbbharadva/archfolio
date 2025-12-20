@@ -44,8 +44,8 @@ export function Navbar() {
     params.set('filter', category)
 
     // ✅ include pathname explicitly
-    const newUrl = `${pathname}?${params.toString()}`
-    window.location.href=newUrl
+    const newUrl = `projects?${params.toString()}`
+    window.location.href = newUrl
   }
 
   return (
@@ -79,7 +79,7 @@ export function Navbar() {
               {isProject && name === 'Projects' && (
                 <div
                   ref={ref}
-                  className="absolute right-[-1rem] top-6 border bg-primaryColor text-white"
+                  className="absolute z-50 right-[-1rem] top-6 border bg-primaryColor text-white rounded-lg"
                 >
                   {FILTERS.map(({ cateogry }) => (
                     <p
