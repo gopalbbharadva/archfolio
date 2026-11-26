@@ -1,30 +1,42 @@
 import './global.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
-import { Navbar } from './components/nav'
+import { Cormorant_Garamond } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Navbar } from './components/nav'
 import Footer from './components/footer'
 import { ThemeProvider } from './components/theme-switch'
 import { metaData } from './config'
-import { Suspense } from 'react'
+
+const display = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
   title: {
     default: metaData.title,
-    template: `%s | ${metaData.title}`,
+    template: `%s | ${metaData.name}`,
   },
   description: metaData.description,
   openGraph: {
-    images: metaData.ogImage,
     title: metaData.title,
     description: metaData.description,
     url: metaData.baseUrl,
     siteName: metaData.name,
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
+  },
+  twitter: {
+    title: metaData.title,
+    description: metaData.description,
+    card: 'summary_large_image',
   },
   robots: {
     index: true,
@@ -32,71 +44,47 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
       'max-image-preview': 'large',
-      'max-snippet': -1,
     },
-  },
-  twitter: {
-    title: metaData.name,
-    card: 'summary_large_image',
-  },
-  icons: {
-    icon: '/favicon.ico',
   },
 }
 
-const cx = (...classes) => classes.filter(Boolean).join(' ')
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F7F4EF' },
+    { media: '(prefers-color-scheme: dark)', color: '#121110' },
+  ],
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <Suspense>
-      <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
-        <head>
-          <link
-            rel="alternate"
-            type="application/rss+xml"
-            href="/rss.xml"
-            title="RSS Feed"
-          />
-          <link
-            rel="alternate"
-            type="application/atom+xml"
-            href="/atom.xml"
-            title="Atom Feed"
-          />
-          <link
-            rel="alternate"
-            type="application/feed+json"
-            href="/feed.json"
-            title="JSON Feed"
-          />
-        </head>
-        <body
-          // !! TODO: needs to change the margin for layouts
-          className="antialiased flex flex-col items-start justify-center 
-              mx-auto p-0"
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${GeistSans.variable} ${GeistMono.variable} ${display.variable}`}
+    >
+      <body className="min-h-screen font-sans">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-white"
           >
-            <main className="flex-auto min-w-0 md:mt-2 flex flex-col px-6 sm:px-4 md:px-0 w-full">
-              <Navbar />
-              <div className="flex-grow">{children}</div>
-              <Footer />
-              <Analytics />
-              <SpeedInsights />
-            </main>
-          </ThemeProvider>
-        </body>
-      </html>
-    </Suspense>
+            Skip to content
+          </a>
+          <Navbar />
+          <main id="main" className="min-h-[60vh]">
+            {children}
+          </main>
+          <Footer />
+          <Analytics />
+          <SpeedInsights />
+        </ThemeProvider>
+      </body>
+    </html>
   )
 }

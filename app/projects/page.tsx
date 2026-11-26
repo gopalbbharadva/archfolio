@@ -1,41 +1,34 @@
-'use client'
+import type { Metadata } from 'next'
+import { Suspense } from 'react'
+import { PageHero } from '../components/page-hero'
+import { ProjectGallery } from './project-gallery'
+import Salon3 from '../assets/projects/salon/Salon3.png'
 
-import React, { useMemo } from 'react'
-import { images } from 'public/projects/projects-data'
-import Image from 'next/image'
-import { redirect, useSearchParams } from 'next/navigation'
+export const metadata: Metadata = {
+  title: 'Projects',
+  description: 'Residential, commercial and salon interiors designed by Vinayak Studio, Surat.',
+}
 
-const Projects = () => {
-  const searchParams = useSearchParams()
-  const filter = searchParams.get('filter')
-
-  const filteredImagesBasedOnCategory = useMemo(() => {
-    if (!filter) return images
-    return images.filter((img) => img.category === filter)
-  }, [filter])
-  if (!searchParams.get('filter')) {
-    redirect('/projects?filter=commercial')
-  }
-  console.log(filter, 'fitler')
-
+export default function ProjectsPage() {
   return (
-    <div>
-      <p className="text-3xl uppercase text-primaryColor font-normal text-center p-4">{filter}</p>
-      <div className="grid grid-cols-3 gap-6 p-4">
-        {filteredImagesBasedOnCategory?.map(({ url }) => (
-          <div
-            key={`${url}`}
-            className="rounded-xl overflow-hidden border border-gray-300 shadow-md"
-          >
-            <Image
-              src={url}
-              alt={`Image ${url}`}
-              className="w-full h-96 object-fill"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
+    <>
+      <PageHero
+        eyebrow="Our work"
+        title={
+          <>
+            Projects &amp; <em className="text-bronze-200">places</em>
+          </>
+        }
+        intro="A selection of homes, stores, offices and salons we have designed. Tap any image to view it full screen."
+        image={Salon3}
+        imageAlt="Salon interior with sage-green chairs and arched mirrors"
+      />
+
+      <section>
+        <Suspense fallback={<div className="h-96" />}>
+          <ProjectGallery />
+        </Suspense>
+      </section>
+    </>
   )
 }
-export default Projects

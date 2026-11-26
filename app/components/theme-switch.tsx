@@ -1,92 +1,41 @@
-"use client";
-import * as React from "react";
-import { useTheme } from "next-themes";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import type { ThemeProviderProps } from "next-themes/dist/types";
-import { FaCircleHalfStroke } from "react-icons/fa6";
+'use client'
 
-const storageKey = 'theme-preference';
+import * as React from 'react'
+import { ThemeProvider as NextThemesProvider, useTheme } from 'next-themes'
+import type { ThemeProviderProps } from 'next-themes/dist/types'
+import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi2'
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  return (
-    <NextThemesProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      {...props}
-    >
-      {children}
-    </NextThemesProvider>
-  );
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }
 
-export const ThemeSwitch: React.FC = () => {
-  const { setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-  const [currentTheme, setCurrentTheme] = React.useState<'light' | 'dark'>('light');
+export function ThemeSwitch({ className = '' }: { className?: string }) {
+  const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
 
-  const getColorPreference = (): 'light' | 'dark' => {
-    if (typeof window !== 'undefined') {
-      const storedPreference = localStorage.getItem(storageKey);
-      if (storedPreference) {
-        return storedPreference as 'light' | 'dark';
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-    return 'light'; 
-  };
+  React.useEffect(() => setMounted(true), [])
 
-  const reflectPreference = (theme: 'light' | 'dark') => {
-    document.documentElement.classList.remove('bg-light', 'bg-dark');
-    document.documentElement.classList.add(`bg-${theme}`);
-    setCurrentTheme(theme);
-    setTheme(theme);
-  };
-
-  React.useEffect(() => {
-    setMounted(true);
-    const initTheme = getColorPreference();
-    reflectPreference(initTheme);
-
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = () => {
-      const newTheme = mediaQuery.matches ? 'dark' : 'light';
-      localStorage.setItem(storageKey, newTheme);
-      reflectPreference(newTheme);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [setTheme]);
-
-  const toggleTheme = () => {
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    localStorage.setItem(storageKey, newTheme);
-    reflectPreference(newTheme);
-  };
-
-  if (!mounted) {
-    return (
-      <FaCircleHalfStroke
-        className="h-[14px] w-[14px] text-[#1c1c1c]"
-        aria-hidden="true"
-      />
-    );
-  }
+  const isDark = mounted && resolvedTheme === 'dark'
 
   return (
     <button
-      id="theme-toggle"
-      aria-label={`${currentTheme} mode`}
-      onClick={toggleTheme}
-      className="flex items-center justify-center transition-opacity duration-300 hover:opacity-90"
+      type="button"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      className={`relative grid h-9 w-9 place-items-center overflow-hidden rounded-full border transition-colors duration-300 ${className}`}
     >
-      <FaCircleHalfStroke
-        className={`h-[14px] w-[14px] ${
-          currentTheme === "dark" ? "text-[#D4D4D4]" : "text-[#1c1c1c]"
+      <HiOutlineSun
+        aria-hidden
+        className={`absolute h-[18px] w-[18px] transition-all duration-500 ease-out-expo ${
+          isDark ? 'translate-y-0 rotate-0 opacity-100' : 'translate-y-6 -rotate-90 opacity-0'
+        }`}
+      />
+      <HiOutlineMoon
+        aria-hidden
+        className={`absolute h-[18px] w-[18px] transition-all duration-500 ease-out-expo ${
+          isDark ? '-translate-y-6 rotate-90 opacity-0' : 'translate-y-0 rotate-0 opacity-100'
         }`}
       />
     </button>
-  );
-};
+  )
+}
