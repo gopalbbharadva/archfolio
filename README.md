@@ -1,62 +1,41 @@
-# Nextfolio
+# Vinayak Studio: Interior & Architecture
 
-A clean, fast, and lightweight portfolio template built with [Next.js](https://nextjs.org/), [Vercel](https://vercel.com/), and [Tailwind CSS](https://tailwindcss.com/) for optimal performance.
+Portfolio website for **Vinayak Studio**, an interior design and architecture practice in Surat.
 
-Deploy your Nextfolio site with Vercel in minutes.
+Built with [Next.js 14](https://nextjs.org/) (App Router), [Tailwind CSS](https://tailwindcss.com/) and `next/image`.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2F1msirius%2FNextfolio)
+## Pages
 
-## Technologies Used
+| Route       | What it shows                                                                                   |
+| ----------- | ----------------------------------------------------------------------------------------------- |
+| `/`         | Hero slideshow, studio intro, project categories, moving gallery, services list, process        |
+| `/about-us` | Studio story, values, contact details                                                            |
+| `/services` | The six services, each with an image and highlights                                              |
+| `/projects` | Filterable gallery (`?filter=residential \| commercial \| salon`) with a full-screen lightbox    |
 
-- Framework: [Next.js](https://nextjs.org/)
-- Typography: [Vercel Geist Font](https://vercel.com/font)
-- Styling: [Tailwind CSS](https://tailwindcss.com/)
-- Analytics: [Vercel Web Analytics](https://vercel.com/docs/speed-insights) and [Speed Insights](https://vercel.com/docs/speed-insights)
-- Deployment: [Vercel](https://vercel.com/)
+## Development
 
-## Features
-
-- **[MDX](https://mdxjs.com/) Support**: Use Markdown with JSX components for blog posts.
-- **Light and Dark Mode Toggle**: Switch between themes for better readability.
-- **Dynamic [OG Images](https://vercel.com/docs/functions/og-image-generation)**: Auto-generate Open Graph images for sharing.
-- **SEO Optimization**: Enhance search visibility with sitemap, robots.txt, and JSON-LD schema.
-- **Dynamic Feed Generation**: Automatic dynamic [RSS](https://nextfolio-template.vercel.app/rss.xml), [Atom](https://nextfolio-template.vercel.app/atom.xml), and [JSON](https://nextfolio-template.vercel.app/feed.json) feeds.
-- **[KaTeX](https://katex.org/) Integration**: Render mathematical expressions smoothly.
-- **Performance Tracking**: Monitor web performance with [Vercel Web Analytics](https://vercel.com/docs/speed-insights) and [Speed Insights](https://vercel.com/docs/speed-insights).
-- **Interactive Embeds**: Easily embed interactive tweets and YouTube videos.
-- **Captions**: Add descriptive captions to photos, tweets, and videos.
-- **Image Grid**: Easily showcase image galleries or photos.
-
-## Installation
-
-Nextfolio uses [pnpm](https://pnpm.io/installation) for dependency management, so ensure it is installed on your system.
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [pnpm](https://pnpm.io/installation) to bootstrap the example:
-
-```
-pnpm create next-app --example https://github.com/1msirius/Nextfolio my-portfolio
+```bash
+pnpm install
+pnpm dev        # http://localhost:3001
+pnpm build && pnpm start
 ```
 
-Start the development server:
+## Editing content
 
-```
-pnpm dev
-```
+- **Contact details, social links, nav**: `app/config.ts`
+- **Project images & titles**: `app/data/projects.ts`. Put the image in `app/assets/projects/<category>/`, import it, and add an entry to `projectImages`.
+- **Services**: `app/data/services.ts`
+- **Brand colours & fonts**: `tailwind.config.js` (`bronze`, `ink`, `ivory`, `night`) and `app/layout.tsx` (Cormorant Garamond + Geist)
 
-The server will be running at [http://localhost:3000](http://localhost:3000).
+Images are imported statically, so Next.js generates blur placeholders and responsive sizes automatically. Prefer images at least **1400px wide** for full-width slots.
 
-## Configuration
+## Animations
 
-1. Update the site metadata and social links in `app/config.ts` to set up SEO, feeds, social links, and Open Graph settings.
-2. Update your routes in `app/sitemap.ts` for SEO optimization.
-3. Update your blog posts in the `/content` folder.
+- `app/components/reveal.tsx`: scroll-triggered reveal (`up`, `left`, `right`, `scale`, `fade`, `curtain`)
+- Keyframes (Ken Burns, marquee, word rise, etc.) live in `tailwind.config.js`
+- All motion is disabled automatically for users with _reduce motion_ enabled.
 
-For more information about configuration, follow the instructions in the [Getting Started](https://nextfolio-template.vercel.app/blog/getting-started#configuration) post.
+## Deployment
 
-## Contributing
-
-Contributions are welcome! To get involved, just push your code to the repo. Whether you're enhancing existing features or adding new ones, your efforts are greatly appreciated!
-
-## Licence
-
-Nextfolio is open-source and released under the MIT License.
+Set `NEXT_PUBLIC_SITE_URL` (e.g. `https://your-domain.com`) so canonical URLs, the sitemap and Open Graph tags point at the right domain. On Vercel the production URL is detected automatically.

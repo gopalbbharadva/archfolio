@@ -1,108 +1,132 @@
-import React from 'react'
-import { FaInstagram } from 'react-icons/fa6'
-import Logo from '../photos/Logo.png' // TODO: for wrong imports can we show some warning or something?
-import { TbMailFilled } from 'react-icons/tb'
-import { socialLinks } from 'app/config'
 import Link from 'next/link'
 import Image from 'next/image'
-import {
-  MdOutlineEmail,
-  MdOutlinePhone,
-  MdOutlineLocationOn,
-} from 'react-icons/md'
-
-function SocialLink({ href, icon: Icon }) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
-      <Icon />
-    </a>
-  )
-}
-
-// function SocialLinks() {
-//   return (
-//     <div className="flex text-lg gap-3.5 float-right transition-opacity duration-300 hover:opacity-90">
-//       <SocialLink href={socialLinks.instagram} icon={FaInstagram} />
-//       <SocialLink href={socialLinks.email} icon={TbMailFilled} />
-//     </div>
-//   )
-// }
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa6'
+import { HiArrowUpRight } from 'react-icons/hi2'
+import { MdOutlineEmail, MdOutlinePhone, MdOutlineLocationOn } from 'react-icons/md'
+import Wordmark from '../assets/logo-wordmark.png'
+import { contact, navItems } from '../config'
+import { CATEGORIES } from '../data/projects'
+import { Reveal } from './reveal'
 
 export default function Footer() {
-  return (
-    <div className="flex justify-between items-center gap-10 p-10 mt-4 border-t border-primaryColor">
-      {/* Logo part  */}
-      <div className="flex flex-col justify-start items-center gap-5 w-full">
-        <Link href="/" className="text-3xl font-semibold tracking-tight">
-          <Image
-            src={Logo}
-            alt="Profile photo"
-            className="rounded-full bg-gray-100 block
-                sm:float-right grayscale hover:grayscale-0 border"
-            unoptimized
-            width={120}
-            height={120}
-            priority
-          />
-        </Link>
-        <p className="text-sm leading-relaxed mb-6 text-center">
-          We believe that good design is timeless, thoughtful, and deeply in
-          context.
-        </p>
-      </div>
-      {/* Quick links part  */}
-      <div className="flex justify-start items-start self-start w-full gap-20">
-        <div className="flex flex-col justify-start items-start gap-6">
-          <a href="/">Home</a>
-          <a href="/services">Services</a>
-          <a className="text-nowrap" href="/about-us">
-            About-Us
-          </a>
-          <a href="/projects">Projects</a>
-        </div>
-        <div className="flex flex-col justify-start items-start gap-4 w-full">
-          <a
-            href="https://g.co/kgs/cJUSPUU"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-start gap-2 text-sm text-gray-800 hover:underline"
-          >
-            <MdOutlineLocationOn size={20} className="text-primaryColor mt-1" />
-            <p className="text-base underline text-primaryColor hover:underline hover:text-primaryColor transition">
-              131, J9 High Street, Opp. Celestial Dream
-            </p>
-          </a>
+  const year = new Date().getFullYear()
 
-          <div className="flex justify-start items-start gap-2">
-            <MdOutlinePhone size={20} className="text-primaryColor" />
+  return (
+    <footer id="contact" className="relative overflow-hidden bg-ink text-neutral-300 dark:bg-black">
+      {/* Big call to action */}
+      <div className="container-page border-b border-white/10 py-20 md:py-28">
+        <Reveal className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
+          <div>
+            <p className="eyebrow !text-bronze-300">Start a project</p>
+            <h2 className="mt-5 max-w-3xl font-display text-5xl font-light leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+              Let’s design a space you’ll <em className="text-bronze-300">love</em> coming back to.
+            </h2>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <a href={`mailto:${contact.email}`} className="btn-primary">
+              Email us <HiArrowUpRight />
+            </a>
             <a
-              href="tel:+919106337193"
-              className="text-base text-gray-800 hover:underline hover:text-primaryColor transition"
+              href={contact.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost-light"
             >
-              +91 9106337193
+              <FaWhatsapp /> WhatsApp
             </a>
           </div>
-          <a href="mailto:gopalbbharadva@gmail.com">
-            <div className="flex justify-start items-center gap-2  text-base text-gray-800 hover:underline hover:text-primaryColor transition">
-              <MdOutlineEmail size={20} className="text-primaryColor" />
-              vinayak.studio.int@gmail.com
-            </div>
+        </Reveal>
+      </div>
+
+      <div className="container-page grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12">
+        <div className="lg:col-span-4">
+          <Image src={Wordmark} alt="Vinayak Studio" className="h-16 w-auto invert" />
+          <p className="mt-6 max-w-xs text-sm leading-relaxed text-neutral-400">
+            We believe good design is timeless, thoughtful and deeply rooted in context.
+          </p>
+          <a
+            href={contact.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 text-sm text-neutral-300 transition-colors hover:text-bronze-300"
+          >
+            <FaInstagram className="h-4 w-4" /> {contact.instagramHandle}
           </a>
         </div>
+
+        <nav aria-label="Footer" className="lg:col-span-2">
+          <p className="eyebrow !text-neutral-500">Studio</p>
+          <ul className="mt-5 space-y-3 text-sm">
+            {navItems.map(({ href, label }) => (
+              <li key={href}>
+                <Link href={href} className="link-underline hover:text-white">
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="lg:col-span-2">
+          <p className="eyebrow !text-neutral-500">Work</p>
+          <ul className="mt-5 space-y-3 text-sm">
+            {CATEGORIES.map((c) => (
+              <li key={c.id}>
+                <Link href={`/projects?filter=${c.id}`} className="link-underline hover:text-white">
+                  {c.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <address className="not-italic lg:col-span-4">
+          <p className="eyebrow !text-neutral-500">Visit &amp; contact</p>
+          <ul className="mt-5 space-y-4 text-sm">
+            <li>
+              <a
+                href={contact.mapHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex gap-3 hover:text-white"
+              >
+                <MdOutlineLocationOn className="mt-0.5 h-5 w-5 shrink-0 text-bronze-300" />
+                <span>
+                  {contact.addressLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                  <span className="mt-1 inline-flex items-center gap-1 text-xs uppercase tracking-[0.16em] text-bronze-300">
+                    Get directions
+                    <HiArrowUpRight className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href={contact.phoneHref} className="flex items-center gap-3 hover:text-white">
+                <MdOutlinePhone className="h-5 w-5 text-bronze-300" />
+                {contact.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`mailto:${contact.email}`}
+                className="flex items-center gap-3 break-all hover:text-white"
+              >
+                <MdOutlineEmail className="h-5 w-5 shrink-0 text-bronze-300" />
+                {contact.email}
+              </a>
+            </li>
+          </ul>
+        </address>
       </div>
-      {/* Contact us part */}
-    </div>
-    // <small className="block lg:mt-24 mt-16 text-[#1C1C1C] dark:text-[#D4D4D4] border border-red-500">
-    //   {metaData.title}
-    //   <style jsx>{`
-    //     @media screen and (max-width: 480px) {
-    //       article {
-    //         padding-top: 2rem;
-    //         padding-bottom: 4rem;
-    //       }
-    //     }
-    //   `}</style>
-    //   <SocialLinks />
-    // </small>
+
+      <div className="container-page flex flex-col gap-2 border-t border-white/10 py-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+        <p>© {year} Vinayak Studio. All rights reserved.</p>
+        <p>Interior &amp; Architecture · Surat, India</p>
+      </div>
+    </footer>
   )
 }
